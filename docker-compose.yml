@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: .
+    command: python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000
+    env_file: [.env.example]
+    environment:
+      DB_PATH: /app/data/mobileweb.db
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    volumes: ["./data:/app/data", "./frontend:/app/frontend:ro"]
+    # Backend is NOT published to the host: only the frontend proxy can reach it.
+  frontend:
+    build: .
+    command: python scripts/frontend_server.py
+    environment:
+      FRONTEND_HOST: 0.0.0.0
+      BACKEND_URL: http://backend:8000
+    ports: ["5173:5173"]
+    volumes: ["./frontend:/app/frontend:ro"]
+    depends_on: [backend]

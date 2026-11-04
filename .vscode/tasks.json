@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Setup (venv + install)", "type": "shell", "command": "python scripts/setup.py", "problemMatcher": []},
+    {"label": "Run Backend", "type": "shell", "command": "python scripts/run.py backend", "isBackground": true, "problemMatcher": [], "presentation": {"panel": "dedicated", "group": "servers"}},
+    {"label": "Run Frontend", "type": "shell", "command": "python scripts/run.py frontend", "isBackground": true, "problemMatcher": [], "presentation": {"panel": "dedicated", "group": "servers"}},
+    {"label": "Run Tests", "type": "shell", "command": "python scripts/run.py test", "problemMatcher": []},
+    {"label": "Docker Up", "type": "shell", "command": "docker compose up --build", "problemMatcher": []},
+    {"label": "Run Backend + Frontend", "dependsOn": ["Run Backend", "Run Frontend"], "problemMatcher": []}
+  ]
+}

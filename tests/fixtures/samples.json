@@ -1,0 +1,10 @@
+{
+  "benign_tags": ["meeting notes", "todo", "Q3 plan", "a < b and c > d", "on call", "location=Lahore", "work/home"],
+  "malicious_tags": ["<script>alert(1)</script>", "<img src=x onerror=alert(1)>", "javascript:alert(1)", "\" onmouseover=\"alert(1)", "<iframe src=//evil>", "&#x6A;avascript:alert(1)", "<svg/onload=alert(1)>"],
+  "cache_cases": [
+    {"path": "/api/auth/me", "tamper": false, "expect": "DENY"},
+    {"path": "/evil.js", "tamper": false, "expect": "DENY"},
+    {"path": "/app.js", "tamper": true, "expect": "DENY"},
+    {"path": "/app.js", "tamper": false, "expect": "ALLOW"}
+  ]
+}

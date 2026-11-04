@@ -1,0 +1,9 @@
+{
+  "rules": 5,
+  "benign_samples": 7,
+  "malicious_samples": 7,
+  "false_positives": [],
+  "false_negatives": [],
+  "detection_rate": 1.0,
+  "avg_decision_latency_ms": 0.0026
+}

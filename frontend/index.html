@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b3d5c">
+<title>MobileWeb Shield</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+  <h1>MobileWeb Shield</h1>
+  <p><span id="net" class="badge">online</span> <span id="who">Signed out</span>
+  <button id="logout" hidden>Log out</button></p>
+</header>
+<p id="status" role="status" aria-live="polite"></p>
+<main id="main">
+  <section id="p-login" aria-labelledby="h-login">
+    <h2 id="h-login">Secure login</h2>
+    <label for="u">Username</label><input id="u" autocomplete="username">
+    <label for="p">Password</label><input id="p" type="password" autocomplete="current-password">
+    <button id="login">Log in</button>
+  </section>
+
+  <section id="p-notes" hidden aria-labelledby="h-notes">
+    <h2 id="h-notes">Encrypted notes <small>(AES-GCM in your browser; server stores ciphertext only)</small></h2>
+    <label for="pass">Notes passphrase (never leaves this device)</label><input id="pass" type="password" autocomplete="off">
+    <label for="tag">Public tag (max 40 chars, scanned for XSS)</label><input id="tag" maxlength="40">
+    <label for="body">Note text</label><textarea id="body" rows="3"></textarea>
+    <button id="save">Save note (queued)</button> <button id="sync">Sync now</button>
+    <p>Pending queue: <strong id="qlen">0</strong></p>
+    <ul id="notes"></ul>
+    <pre id="opened" aria-live="polite"></pre>
+  </section>
+
+  <section id="p-sess" hidden aria-labelledby="h-sess">
+    <h2 id="h-sess">Sessions &amp; device loss</h2>
+    <button id="rsess">Refresh</button> <button id="lost">I lost a device: revoke ALL my sessions</button>
+    <ul id="sessions"></ul>
+  </section>
+
+  <section id="p-tools" hidden aria-labelledby="h-tools">
+    <h2 id="h-tools">Security tools</h2>
+    <h3>Stolen-session simulation</h3>
+    <label for="rua">Simulated User-Agent</label><input id="rua" value="EvilBrowser/9.9">
+    <label for="rip">Simulated IP</label><input id="rip" value="203.0.113.7">
+    <button id="rsim">Score my current session</button>
+    <h3>Cache poisoning check</h3>
+    <label for="cp">Path</label><input id="cp" value="/app.js">
+    <label for="ch">SHA-256 presented</label><input id="ch" value="deadbeef">
+    <button id="cver">Verify against manifest</button>
+    <pre id="toolout" aria-live="polite"></pre>
+  </section>
+
+  <section id="p-admin" hidden aria-labelledby="h-admin">
+    <h2 id="h-admin">Administration</h2>
+    <label for="thr">Risk threshold (10-100)</label><input id="thr" type="number" min="10" max="100">
+    <button id="setthr">Save threshold</button>
+    <p><button id="raudit">Load audit log</button> <button id="vaudit">Verify chain</button>
+    <a id="exp" href="/api/audit/export" download="audit.csv">Export CSV</a></p>
+    <div class="scroll"><table><caption>Audit events (newest first)</caption>
+    <thead><tr><th scope="col">#</th><th scope="col">Actor</th><th scope="col">Action</th><th scope="col">Outcome</th><th scope="col">Detail</th><th scope="col">AI</th></tr></thead>
+    <tbody id="audit"></tbody></table></div>
+    <pre id="adminout" aria-live="polite"></pre>
+  </section>
+
+  <section id="p-report" hidden aria-labelledby="h-rep">
+    <h2 id="h-rep">Report</h2>
+    <button id="rrep">Load report</button>
+    <pre id="repout"></pre>
+  </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

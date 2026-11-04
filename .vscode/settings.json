@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "actionButtons": {
+    "defaultColor": "#ffffff",
+    "loadNpmCommands": false,
+    "reloadButton": null,
+    "commands": [
+      {"name": "$(tools) Setup", "singleInstance": true, "command": "python scripts/setup.py"},
+      {"name": "$(server) Backend", "singleInstance": true, "command": "python scripts/run.py backend"},
+      {"name": "$(browser) Frontend", "singleInstance": true, "command": "python scripts/run.py frontend"},
+      {"name": "$(beaker) Tests", "singleInstance": true, "command": "python scripts/run.py test"},
+      {"name": "$(package) Docker", "singleInstance": true, "command": "docker compose up --build"}
+    ]
+  }
+}
